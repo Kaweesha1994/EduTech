@@ -1,5 +1,5 @@
-import {UserDto} from '../dto/UserDto';
+import {UserDto} from '../../data/dto/UserDto';
 
 export interface UserService {
-  getUser(): UserDto;
+  getUser(id: number): UserDto;
 }

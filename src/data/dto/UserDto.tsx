@@ -5,43 +5,43 @@ export class UserDto {
   private password: string;
   private address: string;
 
-  getId() {
+  get Id(): number {
     return this.id;
   }
 
-  setId(id: number) {
+  set Id(id: number) {
     this.id = id;
   }
 
-  getEmail() {
+  get Email(): string {
     return this.email;
   }
 
-  setEmail(email: string) {
+  set Email(email: string) {
     this.email = email;
   }
 
-  getFullName() {
-    this.fullname;
+  get FullName(): string {
+    return this.fullname;
   }
 
-  setFullName(fullName: string) {
+  set FullName(fullName: string) {
     this.fullname = fullName;
   }
 
-  getPassword() {
+  get Password(): string {
     return this.password;
   }
 
-  setPassword(password: string) {
+  set Password(password: string) {
     this.password = password;
   }
 
-  getAddress() {
+  get Address(): string {
     return this.address;
   }
 
-  setAddress(address: string) {
+  set Address(address: string) {
     this.address = address;
   }
 }

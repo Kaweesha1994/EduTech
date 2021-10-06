@@ -1,5 +1,5 @@
-import {User} from '../../data/entity/User';
+import {UserDto} from '../../data/dto/UserDto';
 
 export interface UserRepository {
-    getUser() : User;
+  getUser(id: number): UserDto;
 }
