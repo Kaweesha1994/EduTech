@@ -6,8 +6,6 @@ import {UserService} from '../UserService';
 export class UserServiceImpl implements UserService {
   userRepository: UserRepository;
 
-  a: User = '';
-
   constructor(userRepo: UserRepository) {
     this.userRepository = userRepo;
   }
