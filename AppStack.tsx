@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import {createStackNavigator} from '@react-navigation/stack';
 import React, {useContext} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
@@ -5,8 +6,18 @@ import {LoginContext} from './src/Utils/LoginProvider';
 import LoadingScreen from './src/presentation/component/Common/LoadingScreen';
 import Login from './src/presentation/component/Login/Login';
 import Home from './src/presentation/component/Home/Home';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 
 const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
+
+const UserDrawerList = () => {
+  return (
+    <Drawer.Navigator initialRouteName="Home">
+      <Drawer.Screen name="Home" component={Home} />
+    </Drawer.Navigator>
+  );
+};
 
 export default function AppStack() {
   const {user, isLoading} = useContext(LoginContext);
@@ -21,9 +32,17 @@ export default function AppStack() {
             component={LoadingScreen}
           />
         ) : user ? (
-          <Stack.Screen name="home" component={Home} />
+          <Stack.Screen
+            options={{headerShown: false}}
+            name="UserDrawerList"
+            component={UserDrawerList}
+          />
         ) : (
-          <Stack.Screen name="App" component={Login} />
+          <Stack.Screen
+            name="EduTec"
+            options={{headerTitleAlign: 'center'}}
+            component={Login}
+          />
         )}
       </Stack.Navigator>
     </NavigationContainer>
