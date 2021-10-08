@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "820594719420",
+    "project_id": "edutec-d74f6",
+    "storage_bucket": "edutec-d74f6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:820594719420:android:a1ef2ff4e6c1a2fdf2aeb9",
+        "android_client_info": {
+          "package_name": "com.edutec"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "820594719420-8f6beqbjkfbdni6itu4h0h34r94sudr3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALrtsKSAtAgfeLujUXQ2SNldvIht3xTvU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "820594719420-8f6beqbjkfbdni6itu4h0h34r94sudr3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

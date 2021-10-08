@@ -1,21 +1,27 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React, { Component } from 'react';
-import {View} from 'react-native';
-import UserComponent from './src/presentation/component/UserComponent';
+import {StyleSheet, View} from 'react-native';
+import AppStack from './AppStack';
+import LoadingScreen from './src/presentation/component/Common/LoadingScreen';
+import Home from './src/presentation/component/Home/Home';
+import Login from './src/presentation/component/Login/Login';
+import LoginProvider from './src/Utils/LoginProvider';
 
 export default class App extends Component {
   render() {
     return (
-      <View>
-        <UserComponent/>
-      </View>
-    );
+      <View style={styles.container}>
+        <LoginProvider>
+          <AppStack/>
+        </LoginProvider>
+      </View>)
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    justifyContent: 'center',
+    padding: 20
+  }
+});

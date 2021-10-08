@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Text, View, Button} from 'react-native';
+import {Text, View} from 'react-native';
 import getUser from "../presenter/UserPresenter";
 
 export default class UserComponent extends Component {
