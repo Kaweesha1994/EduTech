@@ -48,27 +48,44 @@ export default class Login extends Component {
 
   signIn = () => {
 
-    FirebaseUtil.signIn(this.state.email, this.state.password).catch((e) => {
+    if(this.state.email != null && this.state.email != '' && this.state.password != null && this.state.password != ''){
+
+      FirebaseUtil.signIn(this.state.email, this.state.password).catch((e) => {
         console.log(e);
         alert("Incorrect Email / Password");
       });
+
+    } else {
+      alert("Email / Password cannot be empty!");
+    }
+
+    
     
   }
 
   signUp = () => {
 
-    console.log(this.state.password + ' ' + this.state.confirmPassword);
+    if(this.state.email != null && this.state.email != ''
+    && this.state.password != null && this.state.email != ''
+    && this.state.confirmPassword != null && this.state.confirmPassword != '') {
 
-    if(this.state.password == this.state.confirmPassword) {
+      if(this.state.password == this.state.confirmPassword) {
 
-      FirebaseUtil.signUp(this.state.email, this.state.password).catch((e) => {
-        console.log(e);
-        alert("Something went wrong");
-      });
+        FirebaseUtil.signUp(this.state.email, this.state.password).catch((e) => {
+          console.log(e);
+          alert("Something went wrong");
+        });
+  
+      } else {
+        alert("Password and confirm password is not match");
+      }
+
 
     } else {
-      alert("Password and confirm password is not match");
+      alert("Fields cannot be empty!");
     }
+
+    
 
   }
   

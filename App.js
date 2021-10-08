@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
 import {StyleSheet, View} from 'react-native';
-import AppStack from './AppStack';
-import LoadingScreen from './src/presentation/component/Common/LoadingScreen';
-import Home from './src/presentation/component/Home/Home';
-import Login from './src/presentation/component/Login/Login';
+import AppStack from './src/presentation/component/AppStack/AppStack';
 import LoginProvider from './src/Utils/LoginProvider';
-import {createDrawerNavigator, DrawerContent} from '@react-navigation/drawer';
-
 
 export default class App extends Component {
   render() {

@@ -2,22 +2,12 @@ import 'react-native-gesture-handler';
 import {createStackNavigator} from '@react-navigation/stack';
 import React, {useContext} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {LoginContext} from './src/Utils/LoginProvider';
-import LoadingScreen from './src/presentation/component/Common/LoadingScreen';
-import Login from './src/presentation/component/Login/Login';
-import Home from './src/presentation/component/Home/Home';
-import {createDrawerNavigator} from '@react-navigation/drawer';
+import {LoginContext} from '../../../Utils/LoginProvider';
+import LoadingScreen from '../Common/LoadingScreen';
+import Login from '../Login/Login';
+import DrawerList from '../DrawerContent/DrawerList';
 
 const Stack = createStackNavigator();
-const Drawer = createDrawerNavigator();
-
-const UserDrawerList = () => {
-  return (
-    <Drawer.Navigator initialRouteName="Home">
-      <Drawer.Screen name="Home" component={Home} />
-    </Drawer.Navigator>
-  );
-};
 
 export default function AppStack() {
   const {user, isLoading} = useContext(LoginContext);
@@ -35,7 +25,7 @@ export default function AppStack() {
           <Stack.Screen
             options={{headerShown: false}}
             name="UserDrawerList"
-            component={UserDrawerList}
+            component={DrawerList}
           />
         ) : (
           <Stack.Screen
