@@ -3,7 +3,6 @@ import { View } from 'react-native';
 import HomeComponent from './HomeComponent';
 import styles from './Home.component.style';
 import FirebaseUtil from '../../../Utils/FirebaseUtil';
-import { LoginContext } from '../../../Utils/LoginProvider';
 
 export default class Home extends Component{ 
 
