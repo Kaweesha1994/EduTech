@@ -9,6 +9,14 @@ export class UserServiceImpl implements UserService {
     this.userRepository = userRepo;
   }
 
+  loginUser(userDto: UserDto): void {
+    this.userRepository.loginUser(userDto);
+  }
+
+  signUpUser(userDto: UserDto): void {
+    this.userRepository.signUpUser(userDto);
+  }
+
   getUser(id: number): UserDto {
     const userDto: UserDto = this.userRepository.getUser(1);
 

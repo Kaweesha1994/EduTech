@@ -1,8 +1,15 @@
-import React, {Component} from 'react';
+import React, {Component, useContext} from 'react';
 import {Text, View, Button, TextInput, StyleSheet} from 'react-native';
 import LoginComponent from './LoginComponent';
 import styles from './Login.component.style';
 import FirebaseUtil from '../../../Utils/FirebaseUtil';
+import { LoginContext } from '../../../Utils/LoginProvider';
+import { UserRepositoryImpl } from '../../../data/repositoryImpl/UserRepositoryImpl';
+import { UserServiceImpl } from '../../../domain/service/impl/UserServiceImpl';
+import { UserDto } from '../../../data/dto/UserDto';
+
+export const userRepository = new UserRepositoryImpl();
+export const userService = new UserServiceImpl(userRepository);
 
 export default class Login extends Component {
 
@@ -10,7 +17,8 @@ export default class Login extends Component {
     email: '',
     password: '',
     confirmPassword: '',
-    create: false
+    create: false,
+    
   }
 
   setEmail = (text) => {
@@ -49,17 +57,18 @@ export default class Login extends Component {
   signIn = () => {
 
     if(this.state.email != null && this.state.email != '' && this.state.password != null && this.state.password != ''){
+      
 
-      FirebaseUtil.signIn(this.state.email, this.state.password).catch((e) => {
-        console.log(e);
-        alert("Incorrect Email / Password");
-      });
+      let userDto = new UserDto();
+
+      userDto.Email = this.state.email;
+      userDto.Password = this.state.password;
+
+      userService.loginUser(userDto);
 
     } else {
       alert("Email / Password cannot be empty!");
     }
-
-    
     
   }
 
@@ -71,10 +80,12 @@ export default class Login extends Component {
 
       if(this.state.password == this.state.confirmPassword) {
 
-        FirebaseUtil.signUp(this.state.email, this.state.password).catch((e) => {
-          console.log(e);
-          alert("Something went wrong");
-        });
+        let userDto = new UserDto();
+
+        userDto.Email = this.state.email;
+        userDto.Password = this.state.password;
+
+        userService.signUpUser(userDto);
   
       } else {
         alert("Password and confirm password is not match");
