@@ -24,7 +24,7 @@ export default StyleSheet.create({
     imgStyle: {
       height: 120,
       width:120,
-      borderRadius: 60
+      borderRadius: 60,
     },
     text: {
       color: 'blue',

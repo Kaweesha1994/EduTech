@@ -1,5 +1,6 @@
 import React, {Component, useState} from 'react';
 import {Button, Alert, Text, TextInput, View, Image, TouchableOpacity } from "react-native";
+import { ScrollView } from 'react-native-gesture-handler';
 import styles from './Profile.component.style';
 
 const ProfileComponent = (props) => {
@@ -22,15 +23,27 @@ const ProfileComponent = (props) => {
       }
 
     return (
-        <View>
+        <ScrollView>
         <View style={styles.viewStyle}>
         <TouchableOpacity
           activeOpacity={0.5}
-          onPress={() => selectOption()}
-          >
-              <Image
-          source={{uri: props.filePath.uri}} 
+          onPress={() => selectOption()}>
+              {
+                  props.filePath.uri != null ? (
+                      <>
+                      <Image
+                source={{uri: props.filePath.uri}}
           style={styles.imgStyle}/>
+                      </>
+                  ): (
+                    <>
+                    <Image
+                source={require('../../../../image/user-profile-icon.png')}
+          style={styles.imgStyle}/>
+                    </>
+                  )
+              }
+              
               </TouchableOpacity>
         </View>
 
@@ -59,7 +72,7 @@ const ProfileComponent = (props) => {
             />
 
         
-      </View>
+      </ScrollView>
     );
 }
 
