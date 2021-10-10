@@ -28,6 +28,20 @@ const LoginComponent = (props) => {
         value={props.confirmPassword}
         secureTextEntry={true}
         />
+        <TextInput
+        placeholder = "Full Name (optional)"
+        onChangeText={props.setFullname}
+        autoCapitalize = "none"
+        value={props.fullname}
+        style= {styles.textInput}
+        />
+        <TextInput
+        placeholder = "Address (optional)"
+        onChangeText={props.setAddress}
+        autoCapitalize = "none"
+        value={props.address}
+        style= {styles.textInput}
+        />
         </>): (<></>)}
         {props.create ? (
           <>

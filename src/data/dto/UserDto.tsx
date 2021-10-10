@@ -4,6 +4,7 @@ export class UserDto {
   private fullname: string;
   private password: string;
   private address: string;
+  private userReferenceId: string;
 
   get Id(): number {
     return this.id;
@@ -43,5 +44,13 @@ export class UserDto {
 
   set Address(address: string) {
     this.address = address;
+  }
+
+  get UserReferenceId(): string {
+    return this.userReferenceId;
+  }
+
+  set UserReferenceId(userReferenceId: string) {
+    this.userReferenceId = userReferenceId;
   }
 }

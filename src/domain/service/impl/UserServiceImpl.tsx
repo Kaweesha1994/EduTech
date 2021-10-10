@@ -26,4 +26,16 @@ export class UserServiceImpl implements UserService {
 
     return userDto;
   }
+
+  addUserDetails(userDto: UserDto): void {
+    this.userRepository.addUserDetails(userDto);
+  }
+
+  getUserByEmail(email: string): Promise<UserDto> {
+    return this.userRepository.getUserByEmail(email);
+  }
+
+  updateUserDetails(userDto: UserDto): void {
+    this.userRepository.updateUserDetails(userDto);
+  }
 }

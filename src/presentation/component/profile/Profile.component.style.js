@@ -15,6 +15,17 @@ export default StyleSheet.create({
       marginBottom: 20,
       borderRadius: 5
     },
+    viewStyle: {
+      height: 150,
+      backgroundColor: 'white',
+      alignItems: 'center',
+      // justifyContent: 'center',
+    },
+    imgStyle: {
+      height: 120,
+      width:120,
+      borderRadius: 60
+    },
     text: {
       color: 'blue',
       marginTop: 20

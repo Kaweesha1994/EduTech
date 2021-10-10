@@ -8,6 +8,8 @@ export default class FirebaseUtil {
 
     }
 
+
+
     static signUp = (email, password) => {
 
         return auth().createUserWithEmailAndPassword(email, password);

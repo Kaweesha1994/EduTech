@@ -7,18 +7,37 @@ import { LoginContext } from '../../../Utils/LoginProvider';
 import { UserRepositoryImpl } from '../../../data/repositoryImpl/UserRepositoryImpl';
 import { UserServiceImpl } from '../../../domain/service/impl/UserServiceImpl';
 import { UserDto } from '../../../data/dto/UserDto';
-
-export const userRepository = new UserRepositoryImpl();
-export const userService = new UserServiceImpl(userRepository);
+import nextId from 'react-id-generator';
 
 export default class Login extends Component {
+
+  userRepository = new UserRepositoryImpl();
+  userService = new UserServiceImpl(this.userRepository);
 
   state = {
     email: '',
     password: '',
     confirmPassword: '',
     create: false,
+    fullname: '',
+    address: ''
     
+  }
+
+  setAddress = (text) => {
+    this.setState(
+      {
+        address: text
+      }
+    );
+  }
+
+  setFullname = (text) => {
+    this.setState(
+      {
+        fullname: text
+      }
+    );
   }
 
   setEmail = (text) => {
@@ -64,7 +83,7 @@ export default class Login extends Component {
       userDto.Email = this.state.email;
       userDto.Password = this.state.password;
 
-      userService.loginUser(userDto);
+      this.userService.loginUser(userDto);
 
     } else {
       alert("Email / Password cannot be empty!");
@@ -82,10 +101,13 @@ export default class Login extends Component {
 
         let userDto = new UserDto();
 
+        userDto.Id = nextId();
         userDto.Email = this.state.email;
         userDto.Password = this.state.password;
+        userDto.FullName = this.state.fullname;
+        userDto.Address = this.state.address;
 
-        userService.signUpUser(userDto);
+        this.userService.signUpUser(userDto);
   
       } else {
         alert("Password and confirm password is not match");
@@ -109,12 +131,16 @@ export default class Login extends Component {
           password = {this.state.password}
           confirmPassword = {this.state.confirmPassword}
           create = {this.state.create}
+          address = {this.state.address}
+          fullname = {this.state.fullname}
           setEmail = {this.setEmail}
           setPassword = {this.setPassword}
           setConfirmPassword = {this.setConfirmPassword}
           setCreate = {this.setCreate}
+          setAddress = {this.setAddress}
+          setFullname = {this.setFullname}
           signIn = {this.signIn}
-          signUp = {this.signUp}
+          signUp = {this.signUp}         
         />
       </View>
     );
