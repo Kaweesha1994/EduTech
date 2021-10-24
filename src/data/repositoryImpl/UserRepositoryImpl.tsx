@@ -2,6 +2,7 @@ import {UserRepository} from '../../domain/repository/UserRepository';
 import {UserDto} from '../dto/UserDto';
 import FirebaseUtil from '../../Utils/FirebaseUtil';
 import database from '@react-native-firebase/database';
+import storage from '@react-native-firebase/storage';
 
 export class UserRepositoryImpl implements UserRepository {
   databaseReference = database().ref('/USER');
@@ -109,4 +110,63 @@ export class UserRepositoryImpl implements UserRepository {
         alert('Something went wrong in updating');
       });
   }
+
+  async uploadProfilePic(userDto: UserDto): Promise<UserDto> {
+
+    console.log("upload image");
+    console.log(userDto.ProfilePicUri);
+
+    let fileName = userDto.ProfilePicUri.substring(userDto.ProfilePicUri.lastIndexOf('/') + 1);
+
+    FirebaseUtil.imageUpload(userDto.ProfilePicUri);
+
+    await database()
+            .ref('/USER/' + userDto.UserReferenceId)
+            .update({
+            profilePicFileName: fileName
+            });
+
+    return userDto;
+  }
+
+  async getProfilePicture(userDto: UserDto): Promise<UserDto> {
+
+    let userDtoNew = new UserDto();
+    let fileName = '';
+
+    await database()
+      .ref('/USER')
+      .orderByChild('email')
+      .equalTo(userDto.Email)
+      .once('value')
+      .then(snapshot => {
+        for (var child in snapshot.val()) {
+          let user = snapshot.child(child).val();
+
+          console.log(child);
+
+          // const userEntity = Object.values(user);
+          const userEntity = JSON.parse(JSON.stringify(user));
+
+          fileName = userEntity.profilePicFileName;
+          console.log('getProfilepic: ');
+          console.log(fileName);
+        }
+      });
+
+      await storage()
+      .ref(fileName) //name in storage in firebase console
+      .getDownloadURL()
+      .then((url) => {
+        console.log('downloading image uri: ');
+        console.log(url);
+        userDtoNew.ProfilePicUri = url;
+      })
+      .catch((e) => console.log('Errors while downloading => ', e));
+
+
+    return userDtoNew;
+
+  }
+
 }
