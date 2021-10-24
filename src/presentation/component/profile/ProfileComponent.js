@@ -29,10 +29,10 @@ const ProfileComponent = (props) => {
           activeOpacity={0.5}
           onPress={() => selectOption()}>
               {
-                  props.filePath.uri != null ? (
+                  props.uri != '' ? (
                       <>
                       <Image
-                source={{uri: props.filePath.uri}}
+                source={{uri: props.uri}}
           style={styles.imgStyle}/>
                       </>
                   ): (

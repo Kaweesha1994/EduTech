@@ -38,4 +38,13 @@ export class UserServiceImpl implements UserService {
   updateUserDetails(userDto: UserDto): void {
     this.userRepository.updateUserDetails(userDto);
   }
+
+  uploadProfilePic(userDto: UserDto): Promise<UserDto> {
+    return this.userRepository.uploadProfilePic(userDto);
+  }
+
+  loadProfilePic(userDto: UserDto): Promise<UserDto> {
+    return this.userRepository.getProfilePicture(userDto);
+  }
+
 }

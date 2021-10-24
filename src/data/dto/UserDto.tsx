@@ -5,6 +5,8 @@ export class UserDto {
   private password: string;
   private address: string;
   private userReferenceId: string;
+  private profilePicUri: string;
+  private profilePicFileName: string;
 
   get Id(): number {
     return this.id;
@@ -53,4 +55,21 @@ export class UserDto {
   set UserReferenceId(userReferenceId: string) {
     this.userReferenceId = userReferenceId;
   }
+
+  get ProfilePicUri(): string {
+    return this.profilePicUri;
+  }
+
+  set ProfilePicUri(profilePicUri: string) {
+    this.profilePicUri = profilePicUri;
+  }
+
+  get ProfilePicFileName(): string {
+    return this.ProfilePicFileName;
+  }
+
+  set ProfilePicFileName(ProfilePicFileName: string) {
+    this.ProfilePicFileName = this.profilePicFileName;
+  }
+
 }

@@ -1,5 +1,5 @@
 import React, {Component, useContext, useState, useEffect, useRef, useDebugValue} from 'react';
-import { View, PermissionsAndroid, Platform } from 'react-native';
+import { View, PermissionsAndroid, Platform, Alert } from 'react-native';
 import ProfileComponent from './ProfileComponent';
 import styles from './Profile.component.style';
 import { UserDto } from '../../../data/dto/UserDto';
@@ -9,6 +9,7 @@ import { UserServiceImpl } from '../../../domain/service/impl/UserServiceImpl';
 import {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import { LoginContext } from '../../../Utils/LoginProvider';
 import ImagePicker, {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import { file } from '@babel/types';
 
 export const userRepository = new UserRepositoryImpl();
 export const userService = new UserServiceImpl(userRepository);
@@ -27,6 +28,9 @@ function Profile(){
     const [email, setEmail] = useState(user);
     const [address, setAddress] = useState(''); 
     const[userReferenceId, setUserReferenceId]=useState('');
+    const [uploading, setUpload] = useState(false);
+    const [transferred, setTransferred] = useState(null); 
+    const [uri, setUri] = useState('');
 
     // const unsubscribe = useRef(() => undefined);
 
@@ -50,11 +54,48 @@ function Profile(){
 
       };
 
+      const uploadImage = async => {
+
+        console.log('upload image 111: ');
+        console.log(uri);
+    
+
+        let userDto = new UserDto();
+        userDto.profilePicUri = uri;
+        userDto.UserReferenceId = userReferenceId;
+
+        setUpload(true);
+
+        userService.uploadProfilePic(userDto).then(response => {
+          setUpload(false);
+          
+        });
+
+      }
+
+      const getImage = async => {
+        let userDto = new UserDto();
+        userDto.Email = user?.email;
+
+        let userDtoNew = new UserDto();
+        userService.loadProfilePic(userDto).then(response => {
+
+          console.log('get image parent');
+        console.log(response.ProfilePicUri);
+
+        setUri(response.ProfilePicUri);
+
+        });
+
+        
+      }
+
      useEffect(() => {      
         
         // if(isAble) {
 
             fetchUserEmail();
+            getImage();
 
             console.log('profile.js - 74');
 
@@ -162,7 +203,10 @@ function Profile(){
             console.log('fileSize -> ', response.fileSize);
             console.log('type -> ', response.type);
             console.log('fileName -> ', response.fileName);
-            setFilePath(response.assets[0]);
+            setUri(response.assets[0].uri);
+
+            uploadImage();
+
           });
     
           const chooseFile = (type) => {
@@ -196,7 +240,10 @@ function Profile(){
               console.log('fileSize -> ', response.fileSize);
               console.log('type -> ', response.type);
               console.log('fileName -> ', response.fileName);
-              setFilePath(response.assets[0]);
+              setUri(response.assets[0].uri);
+            
+              uploadImage();
+
             });
           };
     
@@ -234,7 +281,9 @@ function Profile(){
           console.log('fileSize -> ', response.assets.fileSize);
           console.log('type -> ', response.assets.type);
           console.log('fileName -> ', response.assets.fileName);
-          setFilePath(response.assets[0]);
+          setUri(response.assets[0].uri);
+
+          uploadImage();
         });
       };
 
@@ -248,7 +297,7 @@ function Profile(){
                 setFullname = {setFullname}
                 setAddress = {setAddress}
                 handleUpdate = {handleUpdate}
-                filePath= {filePath}
+                uri = {uri}
                 captureImage= {captureImage}
                 chooseFile = {chooseFile}
                 />

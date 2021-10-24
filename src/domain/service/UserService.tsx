@@ -6,5 +6,7 @@ export interface UserService {
   addUserDetails(userDto: UserDto): void;
   getUser(id: number): UserDto;
   getUserByEmail(email: string): Promise<UserDto>;
+  uploadProfilePic(userDto: UserDto): Promise<UserDto>;
   updateUserDetails(userDto: UserDto): void;
+  loadProfilePic(userDto: UserDto): Promise<UserDto>;
 }

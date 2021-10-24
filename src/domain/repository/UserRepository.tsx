@@ -7,4 +7,6 @@ export interface UserRepository {
   getUser(id: number): UserDto;
   getUserByEmail(email: string): Promise<UserDto>;
   updateUserDetails(userDto: UserDto): void;
+  uploadProfilePic(userDto: UserDto): Promise<UserDto>;
+  getProfilePicture(userDto: UserDto): Promise<UserDto>;
 }
